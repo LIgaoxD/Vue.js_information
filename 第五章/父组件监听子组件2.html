@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<parent></parent>
+		</div>
+		
+		<template id='parent'>
+			<div>
+				<p>子组件传送过来的值是:{{message}}</p>
+				<child @send="reci"></child>
+			</div>
+		</template>
+		
+		<template id='child'>
+			<div>
+				<input type="button" @click="myclick"  value="send" />
+				<input type="text" v-model="message"/>
+			</div>
+		</template>
+		
+		<script type="text/javascript">
+		    Vue.component('parent',{
+				template:'#parent',
+				data() {
+					return {
+						message:''
+					}
+				},
+				methods:{
+					reci:function(payload){
+						this.message=payload
+					}
+				}
+			});
+			Vue.component('child',{
+				template:'#child',
+				data() {
+					return {
+						message:'子组件的消息'
+					}
+				},
+				methods:{
+					myclick:function(){
+						this.$emit('send',this.message)
+					}
+				}
+			})
+			let vm =new Vue({
+				el:'#app',
+			})
+		</script>
+	</body>
+</html>

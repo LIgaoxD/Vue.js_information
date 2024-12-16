@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+		  #app {
+		    width: 600px;
+		    margin: 40px auto;
+		  }
+		  .outer {
+		    display: flex;
+		    margin-bottom: 20px;
+		  }
+		  .inner {
+		    padding: 0 10px;
+		    text-align: center;
+		    min-width: 100px;
+		    border-bottom: 1px solid #000;
+		    font-weight: bold;
+		    color: red;
+		  }
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class="outer">
+				今天天气不错，我准备
+				<div class="inner">
+					{{activity}}
+				</div>。
+			</div>
+			<advice @advice="receiveAdvice"></advice>
+		</div>
+		
+		<template id="tmp">
+			<input type="button" @click="btnclick" value="单击" />
+		</template>
+		<script type="text/javascript">
+		    Vue.component('advice',{
+				data:function(){
+					return {
+						arr:['打篮球','踢足球','看书','游泳']
+					}
+				},
+				template:'#tmp',
+				methods:{
+					btnclick:function(){
+						let msg=this.arr[Math.floor(Math.random()*this.arr.length)];
+						this.$emit('advice',msg);
+					}
+				}
+			});
+			let vm =new Vue({
+				el:'#app',
+				data:{
+					activity:""
+				},
+				methods:{
+					receiveAdvice:function(message){
+						this.activity=message;
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

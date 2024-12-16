@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>用户注册</title>
+</head>
+
+<body>
+	<div id="app">
+		<form>
+			<table border="0">
+				<tr>
+					<td>用户名:</td>
+					<td>
+						<input type="text" name="username" v-model="user.username">
+					</td>
+				</tr>
+				<tr>
+					<td>密码:</td>
+					<td>
+						<input type="password" name="password" v-model="user.password">
+					</td>
+				</tr>
+				<tr>
+					<td>性别：</td>
+					<td>
+						<input type="radio" name="gender" value="1" v-model="user.gender">男
+						<input type="radio" name="gender" value="0" v-model="user.gender">女
+					</td>
+				</tr>
+				<tr>
+					<td>邮件地址：</td>
+					<td>
+						<input type="text" name="email" v-model="user.email">
+					</td>
+				</tr>
+				<tr>
+					<td>密码问题：</td>
+					<td>
+						<input type="text" name="pwdQuestion" v-model="user.pwdQuestion">
+					</td>
+				</tr>
+				<tr>
+					<td>密码答案：</td>
+					<td>
+						<input type="text" name="pwdAnswer" v-model="user.pwdAnswer">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="submit" value="注册" v-on:click.prevent="register">
+					</td>
+					<td><input type="reset" value="重填"></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+	<script src="Vue.js"></script>
+
+	<script>
+		let vm = new Vue({
+			el: '#app',
+			data: {
+				user: {
+					username: '',
+					password: '',
+					gender: '',
+					email: '',
+					pwdQuestion: '',
+					pwdAnswer: ''
+				}
+			},
+			methods: {
+				register: function () {
+					//直接发送this.user对象
+					//...
+					console.log(this.user);
+				}
+			}
+		});
+	</script>
+
+</body>
+<html>

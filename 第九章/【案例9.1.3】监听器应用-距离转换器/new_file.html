@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<input type="number" v-model="km"/>
+			<input type="number" v-model="m"/>
+		</div>
+		
+		<script type="text/javascript">
+			let vm =new Vue({
+				el:'#app',
+				data:{
+					km:0,
+					m:0
+				},
+				methods:{
+					kmtom:function(){
+						this.m=this.km*1000;
+					},
+					mtokm:function(){
+						this.km=this.m/1000;
+					}
+				},
+				watch:{
+					km:function(){
+						this.kmtom();
+					},
+					m:function(){
+						this.mtokm();
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

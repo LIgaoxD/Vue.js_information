@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <style>
+    #app {
+      display: flex;
+      margin: 20px auto;
+      width: 1600px;
+    }
+    .column {
+      border: 1px solid #000;
+      width: 50%;
+    }
+    .column:first-child {
+      margin-right: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="column">
+      <img src="./sxh.jpg" width="100%">
+    </div>
+    <div class="column" v-img="'./sxh.jpg'"></div>
+  </div>
+</body>
+<script>
+  	Vue.directive('img', function(el, binding){
+      //随机色填充
+      let bg = '#' + Math.floor(Math.random() * 1000000)
+      el.style.background = bg
+      let value = binding.value
+      
+      let img = new Image()
+      img.onload = function(){
+        el.style.background = 'initial'
+        el.appendChild(img)
+      }
+      img.setAttribute('width', '100%')
+      img.src = value
+    })
+    let vm = new Vue({
+      el: '#app'
+    }) 
+</script>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app" v-hook>
+    信息：{{message}}
+    <div style="margin-top: 20px">
+      <button @click="updateMessage">更新message</button>
+      <button @click="destroyVm">销毁Vue实例</button>
+    </div>
+  </div>
+</body>
+<script>
+  Vue.directive('hook', {
+    bind: function(){
+      console.log('bind!')
+    },
+    inserted: function(el,binding){
+      console.log('inserted!')
+	  console.log(el);
+	  console.log(binding);
+    },
+    update: function() {
+      console.log('update!')
+    },
+    componentUpdated: function() {
+      console.log('componentUpdated!')
+    },
+    unbind: function() {
+      console.log('unbind!')
+    }
+  })
+  let vm = new Vue({
+    el: '#app',
+    data: {
+      message: '初始消息'
+    },
+    methods: {
+      updateMessage: function(){
+        this.message = '更新后的消息'
+      },
+      destroyVm: function(){
+        this.$destroy()
+      }
+    }
+  })
+</script>
+</html>

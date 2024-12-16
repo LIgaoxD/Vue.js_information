@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h2>大写</h2>
+    <p v-case.uppercase="msg1"></p>
+  </div>
+  <div id="app2">
+    <h2>小写</h2>
+    <p v-case.lowercase="msg2"></p>
+  </div>
+</body>
+<script>
+  let vm = new Vue({
+    el: '#app',
+    data: {
+      msg1: 'hello'
+    },
+    directives: {
+      case: {
+        inserted: function(el, binding) {
+          let content = binding.value
+          let modifiers = binding.modifiers
+          if (modifiers.uppercase) {
+            el.innerHTML = String(content).toUpperCase()
+          } else if (modifiers.lowercase) {
+            el.innerHTML = String(content).toLowerCase()
+          }
+        }
+      }
+    }
+  }) 
+  let vm2 = new Vue({
+    el: '#app2',
+    data: {
+      msg2: 'VUE.JS'
+    }
+  })
+</script>
+</html>

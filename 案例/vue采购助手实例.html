@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.css" rel="stylesheet" />
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+  <style>
+    h1 {
+      margin: 20px;
+      text-align: center;
+    }
+
+    h4 {
+      margin: 20px 0;
+    }
+
+    .card {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>采购小助手</h1>
+    <form>
+      <div class="form-group">
+        <label for="name">物资名：</label>
+        <input type="text" class="form-control" id="name" />
+      </div>
+      <div class="form-group">
+        <label for="price">单价：</label>
+        <input type="number" class="form-control" id="price" />
+      </div>
+      <div class="form-group">
+        <label for="amount">数量：</label>
+        <input type="number" class="form-control" id="amount" />
+      </div>
+      <button type="submit" class="btn btn-primary" id="submit">记账</button>
+    </form>
+    <h4>历史采购</h4>
+
+    <div id="app">
+      <div class="history-list" id="history-list">
+        <div class="card" v-for="g in goods">
+          <div class="card-body">
+            <h5 class="card-title">{{g.date}}</h5>
+            <p class="card-text">物资：{{g.name}},单价：{{g.price}}，数量；{{g.amount}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</body>
+<script>
+  $("#submit").click(function (e) {
+    e.preventDefault();
+    var today = new Date();
+    var name = $("#name").val();
+    var price = $("#price").val();
+    var amount = $("#amount").val();
+    var str = `<div class="card">
+        <div class="card-body">
+          <h5 class="card-title">
+            ${today.getFullYear()}年${today.getMonth() + 1}月${today.getDate()}日
+          </h5>
+          <p class="card-text">物资：${name},单价：${price}元，数量：${amount}</p>
+          <p class="card-text">共计：${price * amount}元</p>    
+        </div>
+        </div> `;//请大家把代码写入到模板字符串中
+    $("#history-list").prepend($(str));
+    $("form")[0].reset();
+  });
+
+  let vm = new Vue({
+    el: '#app',
+    data: {
+      goods: [
+        { data: "2022年12月28日", name: "西红柿", price: 4, sum: 12 },
+        { data: "2022年12月29日", name: "猪蹄", price: 36, sum: 8 }
+      ]
+    }
+  })
+
+
+</script>
+
+</html>

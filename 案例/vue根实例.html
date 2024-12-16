@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="vue.js"></script>
+</head>
+
+<body>
+	<div id="app">{{msg}}</div>
+</body>
+<script>
+	var vm = new Vue({
+		el: '#app',	//通过el来挂载div元素
+		data: {
+			msg: 'vue 实例创建成功！'
+		}
+	})
+</script>
+
+</html>

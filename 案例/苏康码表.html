@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>用 Vue.js 做表单验证</title>
+	<script src="Vue.js"></script>
+</head>
+
+<body>
+	<div class="container" style="padding-top: 20px;">
+		<h3 class="text-danger">苏康码填报页面</h3>
+		<div class="row">
+			<div class="col-xs-12 col-sm-4 col-sm-offset-4">
+				<div class="panel panel-primary">
+					<div class="panel-body">
+						<form id="register">
+							<div class="form-group">
+								<label for="nikeName">填报人姓名：</label><br>
+								<input type="text" class="form-control" id="nikeName" placeholder="*雪冬"
+									v-model="nikeName">
+							</div>
+							<div class="form-group">
+								<label for="pwd">证件号：</label><br>
+								<input type="password" class="form-control" id="pwd" placeholder="130*****054" v-model="pwd">
+							</div>
+							<div class="form-group">
+								<label for="pwd2">手机号</label><br>
+								<input type="password" class="form-control" id="pwd2" placeholder="173***2761"
+									v-model="pwd2">
+							</div>
+							<div class="form-group">
+								<label for="email">您是从哪里来江苏的？</label><br>
+								<input type="text" class="form-control" id="email" placeholder="请输入地址" v-model="email">
+							</div>
+							<div class="form-group">
+								<label for="email">到江苏后居住地区（选择到乡镇/街道）</label><br>
+								<input type="text" class="form-control" id="email" placeholder="请输入地址" v-model="email">
+							</div>
+							<div class="form-group">
+								<label for="email">到达江苏后详细地址（具体到门牌号）</label><br>
+								<input type="text" class="form-control" id="email" placeholder="********41***3***1905" v-model="email">
+							</div>
+							
+						</form>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		new Vue({
+			el: '#register',
+			data: {
+				nikeName: '',
+				pwd: '',
+				pwd2: '',
+				email: '',
+				sex:'',
+				consent: false
+			},
+			computed: {
+				verify: function () {
+					if (!this.nikeName) {
+						return { "flag": false, "msg": '请填写有效的用户名' };
+					}
+					if (this.pwd.length < 6 || this.pwd.length > 16) {
+						return { "flag": false, "msg": '密码长度在6-16个字符之间' };
+					}
+					if (this.pwd != this.pwd2) {
+						return { "flag": false, "msg": '两次输入的密码不一致' };
+					}
+					if (!/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/.test(this.email)) {
+						return { "flag": false, "msg": '请填写有效的邮箱' };
+					}
+					if (!this.consent) {
+						return { "flag": false, "msg": '请勾选[同意服务条款]' };
+					}
+					return { "flag": true, "msg": 'ok' };
+				}
+			},
+			methods: {
+				submit: function () {
+					if (!this.verify.flag) {
+						layer.open({
+							content: this.verify.msg,
+							skin: 'msg',
+							time: 2
+						});
+						return;
+					}
+					var loading = layer.open({
+						type: 2,
+						content: '正在注册中'
+					});
+					setTimeout(function () {
+						layer.close(loading);
+						layer.open({
+							content: '注册成功，去体验吗？',
+							btn: '立即体验',
+							yes: function () {
+								layer.closeAll();
+								setTimeout(function () {
+									window.open('https://blog.csdn.net/u013350495');
+								}, 500);
+							}
+						});
+					}, 2000);
+				}
+			}
+		})
+	</script>
+</body>
+</html>

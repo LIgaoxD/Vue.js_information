@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<label>千米：</label>
+			<input type="number" v-model="km">
+			<label>米：</label>
+			<input type="number" v-model="m">
+		</div>
+	</body>
+	<script>
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				km: 0,
+				m: 0
+			},
+			methods: {
+				kmtom: function(val) {
+					this.m = this.km * 1000;
+				},
+				mtokm: function(val) {
+					this.km = this.m / 1000;
+				}
+			},
+			watch: {
+				km: 'kmtom',
+				m: 'mtokm'
+			}
+		})
+	</script>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../vue.js"></script>
+  <title>Document</title>
+  <style>
+    .active {
+      text-decoration: underline;
+    }
+    .text-danger {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+	<div v-bind:style="{color: activeColor,fontSize: fontSize +'px'}">Hello World!</div>
+	<div v-bind:style="styleObj">Vue.js</div>
+  </div>
+</body>
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      activeColor: 'red',
+      fontSize: 30,
+      styleObj: {
+        fontSize: '30px',
+        'text-decoration': 'underline'
+      }
+    }
+  })
+</script>
+</html>

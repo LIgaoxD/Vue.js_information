@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="vue-v2.6.10.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		
+		<div id="app">
+			<div v-bind:id="ID|IDformat(4)">
+				{{ID}}
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			let vm = new Vue({
+				el:'#app',
+				data:{
+					ID:"320421200001021234"
+				},
+				filters:{
+					IDformat(value,len){
+						return value.substr(6,len)
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

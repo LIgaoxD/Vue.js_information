@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #app {
+      width: 1000px;
+      margin: 40px auto;
+    }
+    .wrapper {
+      margin-bottom: 10px;
+      width: 400px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 5px 5px 2px #ccc;
+      padding: 10px;
+    }
+    .book-name {
+      text-align: center;
+      font-size: 20px;
+    }
+    .book-info {
+      margin: 10px;
+      display: flex;
+      justify-content: space-around;
+    }
+  </style>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <book :name="book1.name" :author="book1.author"
+      :language="book1.language" :page="book1.page"
+      :num="book1.num"
+    ></book>
+    <!-- book2属性值类型错误 -->
+    <book :name="book2.name" :author="book2.author"
+      :language="book2.language" :page="book2.page"
+      :num="book2.num"
+    ></book>
+    <book-component :book="book3"></book-component>
+    <!-- 类型错误 -->
+    <!-- <book-component :book="book1"></book-component> -->
+  </div>
+</body>
+<script type="text/x-template" id="book">
+  <div class="wrapper">
+    <div class="book-name">《{{name}}》</div>
+    <div class="book-info">
+      <span>作者：{{author}}</span>
+      <span>语言：{{language}}</span>
+    </div>
+    <div class="book-info">
+      <span>页数：{{page}}</span>
+      <span>库存：{{num}}</span>
+    </div>
+  </div>
+</script>
+<script type="text/x-template" id="book-component">
+  <div class="wrapper">
+    <div class="book-name">《{{book.name}}》</div>
+    <div class="book-info">
+      <span>作者：{{book.author}}</span>
+      <span>语言：{{book.language}}</span>
+    </div>
+    <div class="book-info">
+      <span>页数：{{book.page}}</span>
+      <span>库存：{{book.num}}</span>
+    </div>
+  </div>
+</script>
+<script>
+  Vue.component('book', {
+    template: '#book',
+    props: {
+      name: String,
+      author: String,
+      language: String,
+      page: Number,
+      num: Number
+    }
+  })
+
+  function BookObj(opt) {
+    this.name = opt.name
+    this.author = opt.author
+    this.language = opt.language
+    this.page = opt.page
+    this.num = opt.num
+  }
+
+  Vue.component('book-component', {
+    template: '#book-component',
+    props: {
+      book: BookObj
+    }
+  })
+  let vm = new Vue({
+    el: '#app',
+    data: {
+      book1: {
+        name: '红楼梦',
+        author: '曹雪芹',
+        language: '中文',
+        page: 1602,
+        num: 199
+      },
+      book2: {
+        name: '红楼梦',
+        author: '曹雪芹',
+        language: '中文',
+        page: '1602',
+        num: 199
+      },
+      book3: new BookObj({
+        name: '红楼梦',
+        author: '曹雪芹',
+        language: '中文',
+        page: 1602,
+        num: 199
+      })
+    }
+  })
+</script>
+</html>

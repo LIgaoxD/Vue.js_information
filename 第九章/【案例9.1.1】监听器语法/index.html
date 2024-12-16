@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+		<script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<h2>简单对象监听器</h2>
+			<input type="text" name="watch" v-model="val">
+			<span>{{ val }}</span>
+			<br>
+			<h2>复杂对象监听器</h2>
+			<input type="text" name="obj.name" value="obj.value" v-model="obj.value">
+			<span>{{ obj.name }},{{ obj.value}}</span>
+		</div>
+		<script>
+			var vue = new Vue({
+					el: "#app",
+					data: {
+						val: "简单对象初始值",
+						obj: {
+							name: "复杂对象name",
+							value: "复杂对象value",
+						}
+
+					},
+					computed:{
+						objnew(){
+							return JSON.parse(JSON.stringify(this.obj))
+						}
+					},
+					watch: {
+						// watch监听器监听的值对应的函数的参数可加可不加，看需要
+						val: function(newval, oldval) {
+							console.log(newval,oldval);
+							console.log(this.val)
+						},
+						//对于复杂对象的监听方式
+						objnew: {
+							deep: true,
+							handler: function(new_val, old_val) {
+								console.log(new_val, old_val)
+							}
+						}
+					}
+				}
+
+			)
+		</script>
+	</body>
+</html>

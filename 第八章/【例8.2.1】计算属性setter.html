@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+	<p>First name: <input type="text" v-model="firstName"></p>
+	<p>Last name: <input type="text" v-model="lastName"></p>
+	<p>fullname:{{fullname}}</p>
+	<button @click="change">改变fullname</button>
+  </div>
+</body>
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      firstName: '',
+      lastName: ''
+    },
+    methods: {
+      change() {
+        this.fullname = 'Harry Potter';
+      }
+    },
+    computed: {
+      fullname: {
+		// getter用于读取
+        get: function() {
+          return this.firstName + ' ' + this.lastName;
+        },
+		// setter写入时触发
+        set: function(newVal) {
+          var arr = newVal.split(' ');
+          this.firstName = arr[0];
+          this.lastName = arr[1];
+        }
+      }
+    }
+  })
+</script>
+</html>

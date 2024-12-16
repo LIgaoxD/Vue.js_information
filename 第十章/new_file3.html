@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="vue-v2.6.10.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			{{15|todouble}}
+		</div>
+		<script type="text/javascript">
+			Vue.filter('todouble',function(val){
+				return val>=10?val:'0'+val;
+			})
+			let vm= new Vue({
+				el:'#app'
+			})
+		</script>
+	</body>
+</html>

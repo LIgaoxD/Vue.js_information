@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+		  #app {
+		    width: 800px;
+		    margin: 20px auto;
+		  }
+		  h2 {
+		    text-align: center;
+		  }
+		  .tabs {
+		    display: flex;
+		    margin-bottom: 20px;
+		  }
+		  .tab {
+		    cursor: pointer;
+		    margin-right: 20px;
+		    border: 1px solid;
+		    width: 80px;
+		    height: 40px;
+		    line-height: 40px;
+		    text-align: center;
+		    font-size: 20px;
+		  }
+		  .focus {
+		    background: rgb(162, 131, 116);
+		    color: #fff;
+		  }
+		  .book {
+		    display: flex;
+		    flex-direction: column;
+		    align-items: center;
+		    width: 160px;
+		  }
+		  .book-name {
+		    margin-top: 10px;
+		    height: 42px;
+		  }
+		  .book-price {
+		    color: red;
+		  }
+		  .books {
+		    display: flex;
+		    justify-content: space-between;
+		  }
+		</style>
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<h2>每日精选</h2>
+			
+			<div class="tabs">
+				<div class="tab focus" @mouseenter="changebook('hot',$event)">
+					热销
+				</div>
+				<div class="tab"  v-on:mouseenter="changebook('tec',$event)">
+					科技
+				</div>
+			</div>
+			
+			<div class="books">
+				<div v-for="item in list">
+					<img :src="item.pic" width="160">
+					<div class="book-name">{{item.name}}</div>
+					<div class="book-price">{{item.price}}</div>
+				</div>
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			let vm = new Vue({
+				el:'#app',
+				data: {
+				  books: {
+				    hot: [{
+				      name: '周大新：安魂',
+				      price: '26.90',
+				      pic: 'ah.webp'
+				    }, {
+				      name: '开端',
+				      price: '49.80',
+				      pic: 'kd.webp'
+				    }, {
+				      name: '长岛小记',
+				      price: '33.80',
+				      pic: 'cdxj.webp'
+				    }, {
+				      name: '沙丘全套 六部曲',
+				      price: '394.90',
+				      pic: 'sq.webp'
+				    }],
+				    tec: [{
+				      name: 'C Primer Plus',
+				      price: '76.20',
+				      pic: 'c.webp'
+				    }, {
+				      name: 'Linux就该这么学',
+				      price: '94.60',
+				      pic: 'linux.webp'
+				    }, {
+				      name: '关于火星的一切',
+				      price: '39.40',
+				      pic: 'linux.webp'
+				    }, {
+				      name: '植物的战斗',
+				      price: '49.00',
+				      pic: 'zw.webp'
+				    }]
+				  },
+				  list: []
+				},
+				methods:{
+					changebook:function(type,event){
+						this.list=this.books[type]; //数据的变化
+						
+						let tabs=document.querySelectorAll('.tab');
+						for(let i=0;i<tabs.length;i++){
+							tabs[i].classList.remove('focus');
+						}
+						
+						let tab=event.target;
+						tab.classList.add('focus');
+					}
+				},
+				mounted() {
+					this.list=this.books['hot']
+				}
+			})
+		</script>
+	</body>
+</html>

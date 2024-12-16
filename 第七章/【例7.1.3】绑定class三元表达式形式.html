@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../vue.js"></script>
+  <title>Document</title>
+  <style>
+    .active {
+      text-decoration: underline;
+    }
+	.text-danger {
+	  font-weight: bold;
+	}
+  </style>
+</head>
+<body>
+  <div id="app">
+	<div v-bind:class="[isActive ? 'active' : '','text-danger']">Hello School!</div>
+  </div>
+</body>
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      isActive: false
+    }
+  })
+</script>
+</html>

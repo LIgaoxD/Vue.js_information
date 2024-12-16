@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue-v2.6.10.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="msg">
+        <!-- 使用过滤器 -->
+        {{msg|myf|nu}}
+    </div>
+
+
+    <div id="app2">
+        <input type="text" v-model="msg">
+        <!-- 使用过滤器 -->
+        {{msg|myf|nu}}
+    </div>
+
+</body>
+<script>
+    var app = new Vue({
+        el:'#app2',
+        data:{
+            msg:''
+        },
+        // 声明私有(局部)过滤器
+        filters:{
+            myf:function(val){
+                return val.toUpperCase();
+            },
+            nu:function(val){
+                var reg = /\d/g;
+                return val.replace(reg,'*');
+            }
+        }
+    });
+
+    var app2 = new Vue({
+        
+    })
+</script>
+</html>

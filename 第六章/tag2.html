@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../vue.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			.el-tag {
+				background-color: #ecf5ff;
+				display: inline-block;
+				height: 32px;
+				padding: 0 10px;
+				line-height: 30px;
+				font-size: 12px;
+				color: #409eff;
+				border: 1px solid #d9ecff;
+				border-radius: 4px;
+				box-sizing: border-box;
+				white-space: nowrap;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<el-tag></el-tag>
+			<el-tag></el-tag>
+		</div>
+		
+		<template id="tmp">
+			<span class="el-tag">
+				标签一
+			</span>
+		</template>
+		<script type="text/javascript">
+		    Vue.component('el-tag',{
+				template:'#tmp'
+			})
+			let vm=new Vue({
+				el:'#app'
+			})
+		</script>
+	</body>
+</html>
